@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard maanlander</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <div id="errors">
+    </div>
+
+    <div id="controls" style="justify-content: center;">
+        <button type="button" id="ledOn">led aan</button>
+        <button type="button" id="ledOff">led uit</button>
+
+    </div>
+
+    <!-- Scripts for fetch post methods-->
+    <script>
+        // Currently using direct post of command like in postmand instead of seperate values
+        // This is meant to show functionality until proper function can be written out
+        // FIGURE OUT, REPLACE AND FLESH OUT ASAP!!!
+        document.querySelector("#ledOn").addEventListener("click", () => {
+            fetch('http://145.49.111.54:1880/groep19?digital_output_1=255', {
+                method: 'POST'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Response van server:", data);
+                    document.getElementById("resultaat").textContent = "Resultaat: Signaal verzonden (1,1,255)";
+                })
+                .catch(error => {
+                    console.error("Fout bij fetch:", error);
+                    document.getElementById("resultaat").textContent = "Resultaat: Fout bij verzenden";
+                });
+        });
+
+        document.querySelector("#ledOff").addEventListener("click", () => {
+            fetch('http://145.49.111.54:1880/groep19?digital_output_1=127', {
+                method: 'POST'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Response van server:", data);
+                    document.getElementById("resultaat").textContent = "Resultaat: Signaal verzonden (1,1,255)";
+                })
+                .catch(error => {
+                    console.error("Fout bij fetch:", error);
+                    document.getElementById("resultaat").textContent = "Resultaat: Fout bij verzenden";
+                });
+        });
+    </script>
+    <!-- End scripts for fetch post methods-->
+    <i id="unixtime">Unixtime output</i>
+    
+    <script>
+        // WebSocket Connection for unixtime from lander
+        const socket = new WebSocket("ws://145.49.111.54:1880/ws/groep19");
+
+        socket.onopen = () => {
+            console.log("WebSocket verbonden met Node-RED voor unixtime.");
+        };
+
+        socket.onmessage = (event) => {
+            console.log("Ontvangen WebSocket data:", event.data);
+
+            try {
+                const json = JSON.parse(event.data);
+                const unixtime = json.unixtime_1;
+
+                if (!isNaN(unixtime)) {
+                    document.getElementById("unixtime").textContent =
+                        "Arduino leeftijd: " + unixtime;
+                } else {
+                    document.getElementById("unixtime").textContent =
+                        "Fout: geen geldige unixtime ontvangen";
+                }
+            } catch (e) {
+                console.error("Fout bij verwerken WebSocket data:", e);
+                document.getElementById("unixtime").textContent =
+                    "Fout: ontvangen data is geen geldige JSON";
+            }
+        };
+
+        socket.onerror = (error) => {
+            console.error("WebSocket fout:", error);
+            document.getElementById("unixtime").textContent = "WebSocket fout bij ontvangen unixtime.";
+        };
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+body {
+  background-color: hsl(210, 10.8%, 14.5%);
+  padding-left: 10px;
+}
+
+div{
+  align-content: center;
+  padding-left: 47%;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+
+i {
+  padding-top: 20px;
+  padding-left: 50%;
+  font-family: Verdana;
+  color: white
+}
+
+button {
+  background-color: #7e6f52;
+  color : white;
+  padding: 15px 32px;
+  font-size: 20px;
+  text-align: center;
+  border: dotted;
+  border-radius: 10px;
+  border-color: orange;
+}
