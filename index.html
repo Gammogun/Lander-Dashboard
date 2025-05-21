@@ -9,6 +9,9 @@
 </head>
 
 <body>
+    <div id="top bar">
+        <img src="images/AASA_logo.png" alt="logo1" width="200" height="200">
+    </div>
     <div id="errors">
     </div>
 
@@ -20,23 +23,22 @@
 
     <!-- Scripts for fetch post methods-->
     <script>
-        // Currently using direct post of command like in postmand instead of seperate values
-        // This is meant to show functionality until proper function can be written out
-        // FIGURE OUT, REPLACE AND FLESH OUT ASAP!!!
+        // post command needs to given directly in the url for the fetch. 
+        // Don't need a header and body because of that
         document.querySelector("#ledOn").addEventListener("click", () => {
             fetch('http://145.49.111.54:1880/groep19?digital_output_1=255', {
-                method: 'POST'
+                method: 'POST',
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log("Response van server:", data);
-                    document.getElementById("resultaat").textContent = "Resultaat: Signaal verzonden (1,1,255)";
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse the JSON from the response
                 })
-                .catch(error => {
-                    console.error("Fout bij fetch:", error);
-                    document.getElementById("resultaat").textContent = "Resultaat: Fout bij verzenden";
-                });
+                .then(data => console.log('Success:', data))
+                .catch(error => console.error('Error:', error));
         });
+        // End led on
 
         document.querySelector("#ledOff").addEventListener("click", () => {
             fetch('http://145.49.111.54:1880/groep19?digital_output_1=127', {
@@ -45,17 +47,15 @@
                 .then(res => res.json())
                 .then(data => {
                     console.log("Response van server:", data);
-                    document.getElementById("resultaat").textContent = "Resultaat: Signaal verzonden (1,1,255)";
                 })
-                .catch(error => {
-                    console.error("Fout bij fetch:", error);
-                    document.getElementById("resultaat").textContent = "Resultaat: Fout bij verzenden";
-                });
+                .catch(error => console.error('Error:', error));
         });
     </script>
     <!-- End scripts for fetch post methods-->
+
+
     <i id="unixtime">Unixtime output</i>
-    
+
     <script>
         // WebSocket Connection for unixtime from lander
         const socket = new WebSocket("ws://145.49.111.54:1880/ws/groep19");
