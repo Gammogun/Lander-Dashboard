@@ -3,11 +3,6 @@ body {
   padding-left: 10px;
 }
 
-div{
-  align-content: center;
-  padding-left: 47%;
-}
-
 h1 {
   color: white;
   text-align: center;
@@ -37,5 +32,33 @@ button {
 }
 
 li {
-  color: aliceblue;
+  color: white;
+}
+
+.center{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#controlsDiv{
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#navbar{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#vertnav{
+  float: left;
+}
+
+#hornav a{
+  display: block;
+  padding: 8px;
 }
