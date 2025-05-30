@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard maanlander</title>
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="/scripts/dataScripts.js"></script>
 </head>
 
 <body>
@@ -21,81 +22,57 @@
 
     <div id="errors">
     </div>
-
-    <div id="controlsDiv">
-        <button type="button" id="ledOn">led aan</button>
-        <button type="button" id="ledOff">led uit</button>
+    <div id="controls" style="justify-content: center;">
+        <button type="button" onclick="ledOn()">led aan</button>
+        <button type="button" onclick="ledOff()">led uit</button>
 
     </div>
-
-    <!-- Scripts for fetch post methods-->
-    <script>
-        // post command needs to be given directly in the url for the fetch. 
-        // Don't need a header and body because of that
-        document.querySelector("#ledOn").addEventListener("click", () => {
-            fetch('http://145.49.111.54:1880/groep19?digital_output_1=255', {
-                method: 'POST',
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // Parse the JSON from the response
-                })
-                .then(data => console.log('Success:', data))
-                .catch(error => console.error('Error:', error));
-        });
-        // End led on
-
-        document.querySelector("#ledOff").addEventListener("click", () => {
-            fetch('http://145.49.111.54:1880/groep19?digital_output_1=127', {
-                method: 'POST'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log("Response van server:", data);
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
-    <!-- End scripts for fetch post methods-->
 
     <i id="unixtime">Unixtime output</i>
 
     <script>
-        // WebSocket Connection for unixtime from lander
-        const socket = new WebSocket("ws://145.49.111.54:1880/ws/groep19");
+        //Web socket script. Should look into putting this in a script file. Need this to open upon website loading
+        const saturl = '145.49.111.54:1880';       //Url used in all API and websocket requests to connect to satellite
+        const groupId = 'groep19';                 //Specific group it wants to connect to
 
+        // WebSocket instance
+        const socket = new WebSocket('ws//'+saturl+'/ws/'+groupId);
+
+        //On connection/opening of socket
         socket.onopen = () => {
-            console.log("WebSocket verbonden met Node-RED voor unixtime.");
+            console.log("WebSocket verbonden met satelliet");
         };
 
+        //On receiving message/JSON from server
         socket.onmessage = (event) => {
             console.log("Ontvangen WebSocket data:", event.data);
 
+            //receives JSON and parses it into readable data
             try {
-                const json = JSON.parse(event.data);
-                const unixtime = json.unixtime_1;
-
-
+                const satData = JSON.parse(event.data);
+              
+                //shows unixtime
                 if (!isNaN(unixtime)) {
                     document.getElementById("unixtime").textContent =
-                        "Arduino leeftijd: " + unixtime;
+                        "Arduino leeftijd: " + satData.unixtime_1;
                 } else {
                     document.getElementById("unixtime").textCont =
                         "Fout: geen geldige unixtime ontvangen";
+                    document.getElementById("unixtime").textContent =
+                        "Geen data ontvangen";
                 }
             } catch (e) {
                 console.error("Fout bij verwerken WebSocket data:", e);
-                document.getElementById("unixtime").textContent =
-                    "Fout: ontvangen data is geen geldige JSON";
             }
         };
 
+        //Handles errors
         socket.onerror = (error) => {
             console.error("WebSocket fout:", error);
             document.getElementById("unixtime").textContent = "WebSocket fout bij ontvangen unixtime.";
         };
+
+        await socket.close(code=1000, reason=None)
     </script>
 
 
