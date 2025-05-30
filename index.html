@@ -10,12 +10,18 @@
 </head>
 
 <body>
-    <div id="top bar">
-        <img src="images/AASA_logo.png" alt="logo1" width="200" height="200">
-    </div>
-    <div id="errors">
+    <img src="images/AASA_logo.png" alt="logo1" width="200" height="200" class="center">
+
+    <!--Navbar-->
+    <div style="width: 100%;">
+        <ul id="navbar">
+            <li id="hornav"><a href="default.asp"></a>test</li>
+            <li id="hornav"><a href="accounts.asp"></a>accounts</li>
+        </ul>
     </div>
 
+    <div id="errors">
+    </div>
     <div id="controls" style="justify-content: center;">
         <button type="button" onclick="ledOn()">led aan</button>
         <button type="button" onclick="ledOff()">led uit</button>
@@ -30,7 +36,7 @@
         const groupId = 'groep19';                 //Specific group it wants to connect to
 
         // WebSocket instance
-        const socket = new WebSocket('ws//' + saturl + '/ws/' + groupId);
+        const socket = new WebSocket('ws//'+saturl+'/ws/'+groupId);
 
         //On connection/opening of socket
         socket.onopen = () => {
@@ -44,12 +50,14 @@
             //receives JSON and parses it into readable data
             try {
                 const satData = JSON.parse(event.data);
-
+              
                 //shows unixtime
                 if (!isNaN(unixtime)) {
                     document.getElementById("unixtime").textContent =
                         "Arduino leeftijd: " + satData.unixtime_1;
                 } else {
+                    document.getElementById("unixtime").textCont =
+                        "Fout: geen geldige unixtime ontvangen";
                     document.getElementById("unixtime").textContent =
                         "Geen data ontvangen";
                 }
