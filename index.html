@@ -6,75 +6,174 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard maanlander</title>
     <link rel="stylesheet" href="stylesheet.css">
-    <script src="/scripts/dataScripts.js"></script>
+
+    <!--local scripts-->
+    <script src="/scripts/core.js" defer></script>
+    <script src="/scripts/dataScripts.js" defer></script>
+    <script src="/scripts/liveChart.js" defer></script>
+
+
+    <!--External Resources -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Kelly.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Dark.js"></script>
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+
 </head>
 
-<body>
-    <img src="images/AASA_logo.png" alt="logo1" width="200" height="200" class="center">
+<body class="avans-palette">
 
-    <!--Navbar-->
-    <div style="width: 100%;">
-        <ul id="navbar">
-            <li id="hornav"><a href="default.asp"></a>test</li>
-            <li id="hornav"><a href="accounts.asp"></a>accounts</li>
-        </ul>
-    </div>
+    <div class="grid-container jersey-15 ">
+        <div class="header">
+            <img src="images/AASA_logo.png" alt="logo1" width="200" height="200" class="center">
+        </div>
+        <!--Div for data-->
+        <div class="left dashboard-body white-text">
+            <h3 class="center">Live data</h3>
+            <div id="livechartdiv"></div>
+        </div>
 
-    <div id="errors">
-    </div>
-    <div id="controls" style="justify-content: center;">
-        <button type="button" onclick="ledOn()">led aan</button>
-        <button type="button" onclick="ledOff()">led uit</button>
+        <!--Div for all controls-->
+        <div class="middle dashboard-body white-text">
+            <h3 class="center">Controle paneel</h3>
+            <div class="interface-group">
+                <button type="button" class="center button jersey-15 white-text " onclick="miniTest()">Led
+                    test</button>
+            </div>
 
-    </div>
+            <!--Divs for arm control-->
+            <div class="center">
+                <!--Rotation controls-->
+                <div class="center controls-block">
+                    <div>
+                        <input type="range" name="turn" id="turn" min="0" max="180" list="degreevalues"
+                            onfocus="getRadioValue('turn', 'turnvalue')">
+                        <!--markers for slider-->
+                        <datalist id="degreevalues">
+                            <option value="0" label="0"></option>
+                            <option value="45" label="45"></option>
+                            <option value="90" label="90"></option>
+                            <option value="135" label="135"></option>
+                            <option value="180" label="180"></option>
+                        </datalist>
+                    </div>
 
-    <i id="unixtime">Unixtime output</i>
+                    <label for="turn" class="jersey-15 white-text"><output id="turnvalue">0</output></label>
+                    <button type="button" class="button jersey-15 white-text">draaien</button>
+                </div>
+                <!--long arm controls-->
+                <div class="center controls-block">
+                    <div>
+                        <input type="range" name="longArm" id="longArm" min="0" max="180" list="degreevalues"
+                            onfocus="getRadioValue('longArm', 'longarmvalue')">
+                        <datalist id="degreevalues">
+                            <option value="0" label="0"></option>
+                            <option value="45" label="45"></option>
+                            <option value="90" label="90"></option>
+                            <option value="135" label="135"></option>
+                            <option value="180" label="180"></option>
+                    </div>
 
-    <script>
-        //Web socket script. Should look into putting this in a script file. Need this to open upon website loading
-        const saturl = '145.49.111.54:1880';       //Url used in all API and websocket requests to connect to satellite
-        const groupId = 'groep19';                 //Specific group it wants to connect to
+                    <label for="turn" class="jersey-15 white-text"><output id="longarmvalue">0</output></label>
+                    <button type="button" class="button jersey-15 white-text">Lange arm</button>
+                </div>
+                <!--short arm controls-->
+                <div class="center controls-block">
+                    <div>
+                        <input type="range" name="shortArm" id="shortArm" min="0" max="180" list="degreevalues"
+                            onfocus="getRadioValue('shortArm', 'shortarmvalue')">
+                        <datalist id="degreevalues">
+                            <option value="0" label="0"></option>
+                            <option value="45" label="45"></option>
+                            <option value="90" label="90"></option>
+                            <option value="135" label="135"></option>
+                            <option value="180" label="180"></option>
+                    </div>
 
-        // WebSocket instance
-        const socket = new WebSocket('ws//'+saturl+'/ws/'+groupId);
+                    <label for="turn" class="jersey-15 white-text"><output id="shortarmvalue">0</output></label>
+                    <button type="button" class="button jersey-15 white-text">Korte arm</button>
+                </div>
 
-        //On connection/opening of socket
-        socket.onopen = () => {
-            console.log("WebSocket verbonden met satelliet");
-        };
+                <button type="button" class="button jersey-15 white-text">Graven</button>
+            </div>
+        </div>
 
-        //On receiving message/JSON from server
-        socket.onmessage = (event) => {
-            console.log("Ontvangen WebSocket data:", event.data);
+        <!--Div for status-->
+        <div class="right dashboard-body white-text">
+            <h3 class="center">Status paneel</h3>
+            <div class="interface-group">
+                <p>Sattelliet Connectie</p>
+                <div id="satCon" class="diode diode__bad"></div>
+            </div>
+            <div id="roverCon" class="interface-group">
+                <p>Aadlander Connectie</p>
+                <div class="diode diode__bad"></div>
+            </div>
+            <div id="sendTask" class="interface-group">
+                <p>Opdracht verzonden</p>
+                <div class="diode"></div>
+            </div>
+            <div id="ledStatus" class="interface-group">
+                <p>Aadlander LED status</p>
+                <div class="diode"></div>
+            </div>
 
-            //receives JSON and parses it into readable data
-            try {
-                const satData = JSON.parse(event.data);
-              
-                //shows unixtime
-                if (!isNaN(unixtime)) {
-                    document.getElementById("unixtime").textContent =
-                        "Arduino leeftijd: " + satData.unixtime_1;
-                } else {
-                    document.getElementById("unixtime").textCont =
-                        "Fout: geen geldige unixtime ontvangen";
-                    document.getElementById("unixtime").textContent =
-                        "Geen data ontvangen";
+        </div>
+
+
+        <!------------Web socket sript------------>
+        <script>
+            //Web socket script. Should look into putting this in a script file. Need this to open upon website loading
+            const saturl = '145.49.111.54:1880';       //Url used in all API and websocket requests to connect to satellite
+            const groupId = 'groep19';                 //Specific group it wants to connect to
+
+            // WebSocket instance
+            const socket = new WebSocket('ws//' + saturl + '/ws/' + groupId);
+
+            //On connection/opening of socket
+            socket.onopen = () => {
+                console.log("WebSocket verbonden met satelliet");
+            };
+
+            //On receiving message/JSON from server
+            socket.onmessage = (event) => {
+                console.log("Ontvangen WebSocket data:", event.data);
+
+                //receives JSON and parses it into readable data
+                try {
+                    const satData = JSON.parse(event.data);
+
+                    //shows unixtime
+                    if (!isNaN(unixtime)) {
+                        document.getElementById("unixtime").textContent =
+                            satData.unixtime_1;
+                    } else {
+                        document.getElementById("unixtime").textCont =
+                            "Fout: geen geldige unixtime ontvangen";
+                        document.getElementById("unixtime").textContent =
+                            "Geen data ontvangen";
+                    }
+                } catch (e) {
+                    console.error("Fout bij verwerken WebSocket data:", e);
                 }
-            } catch (e) {
-                console.error("Fout bij verwerken WebSocket data:", e);
-            }
-        };
+            };
 
-        //Handles errors
-        socket.onerror = (error) => {
-            console.error("WebSocket fout:", error);
-            document.getElementById("unixtime").textContent = "WebSocket fout bij ontvangen unixtime.";
-        };
+            //Handles errors
+            socket.onerror = (error) => {
+                console.error("WebSocket fout:", error);
+            };
 
-        await socket.close(code=1000, reason=None)
-    </script>
+            await socket.close(code = 1000, reason = None)
+        </script>
+        <!------------End web socket sript------------>
 
+    </div>
 
 
 </body>

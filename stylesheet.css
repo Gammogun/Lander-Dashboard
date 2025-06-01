@@ -1,64 +1,202 @@
-body {
-  background-color: hsl(210, 10.8%, 14.5%);
-  padding-left: 10px;
+/*font*/
+.jersey-15 {
+  font-family: "Jersey 15", sans-serif;
+  font-weight: 400;
+  font-size: 25px;
+  font-style: normal;
 }
 
-h1 {
-  color: white;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*palette based on avans colors*/
+.avans-palette {
+  background-color: hsl(223.64, 64.71%, 6.67%);
+}
+
+.green-text {
+  color: rgb(43, 197, 43);
+}
+
+.white-text {
+  color: whitesmoke;
+}
+
+/* Style the header */
+.header {
+  grid-area: header;
+  padding: 30px;
   text-align: center;
+  font-size: 35px;
+  border-bottom: solid red;
+  border-width: 10px;
 }
 
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
-
-i {
-  padding-top: 20px;
-  padding-left: 50%;
-  font-family: Verdana;
-  color: white
-}
-
-button {
-  background-color: #7e6f52;
-  color : white;
-  padding: 15px 32px;
-  font-size: 20px;
-  text-align: center;
-  border: dotted;
+.button {
+  background-color: #333336;
+  border: double;
+  border-color: #818181;
   border-radius: 10px;
-  border-color: orange;
+  padding: 10px 15px;
+  text-align: center;
+  display: inline-block;
 }
 
-li {
-  color: white;
+.button:active {
+  box-shadow:
+    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
-.center{
+/* grid container */
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'left left left middle middle right'
+    'footer footer footer footer footer footer';
+}
+
+/* Dashboard grid body style*/
+.dashboard-body {
+  background-color: #040413;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: 5px solid rgb(32, 29, 29);
+  padding: 5px;
+}
+
+/* Centering of content */
+.center {
   display: block;
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
 }
 
-#controlsDiv{
-  padding-top: 20px;
+h3 {
+  border-bottom: solid;
+  border-width: 5px;
+}
+
+/* Left column */
+.left {
+  grid-area: left;
+}
+
+/* Middle column */
+.middle {
+  grid-area: middle;
+}
+
+/* Right column */
+.right {
+  grid-area: right;
+}
+
+/* Footer style */
+.footer {
+  grid-area: footer;
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+#livechartdiv {
+  background-color: #02000e;
+  width: 100%;
+  height: 600px;
+}
+
+/* Shows all elements for a feedback item */
+.interface-group {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: solid;
 }
 
-#navbar{
-  list-style-type: none;
-  margin: 0;
+.controls-block {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+datalist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  writing-mode: horizontal-tb;
+  width: 250px;
+}
+
+option {
+  font-size: 15px;
   padding: 0;
 }
 
-#vertnav{
-  float: left;
+input[type="range"] {
+  width: 250px;
+  margin: 0;
 }
 
-#hornav a{
-  display: block;
-  padding: 8px;
+/*Creates a diode for status feedback. Very fancy*/
+/*Source: https://codepen.io/fooontic/pen/yLGmKVE*/
+.diode {
+  width: 1em;
+  height: 1em;
+  background-color: hsl(180 16 40);
+  border-radius: 99em;
+  box-shadow:
+    inset -1px -2px 6px 2px hsl(144 50 0 / 60%),
+    inset -2px -3px 6px 2px hsl(144 50 0 / 50%),
+
+    inset 1px 2px 4px hsl(144 50 0 / 60%),
+    inset 0px 1px 2px hsl(144 50 0 / 80%),
+    inset 0 1px 2px 1px hsl(144 50 0 / 40%),
+
+    0 1px 1px 1px hsl(144 50 80 / 10%),
+
+    0 0 0 1px hsl(144 50 0 / 50%);
+}
+
+.diode__good {
+  background-color: hsl(144 100 65);
+
+  box-shadow:
+    inset -1px -2px 6px 2px hsl(144 50 0 / 60%),
+    inset -2px -3px 6px 2px hsl(144 50 0 / 50%),
+
+    inset 1px 2px 4px hsl(144 50 0 / 60%),
+    inset 0px 1px 2px hsl(144 50 0 / 80%),
+    inset 0 1px 2px 1px hsl(144 50 0 / 40%),
+
+    0 1px 1px 1px hsl(144 50 80 / 10%),
+
+    0 1px 12px 1px hsl(144 50 50 / 40%),
+
+    0 0 0 1px hsl(144 50 0 / 50%);
+}
+
+.diode__bad {
+  background-color: hsl(0, 100%, 60%);
+
+  box-shadow:
+    inset -1px -2px 6px 2px hsl(144 50 0 / 60%),
+    inset -2px -3px 6px 2px hsl(144 50 0 / 50%),
+
+    inset 1px 2px 4px hsl(144 50 0 / 60%),
+    inset 0px 1px 2px hsl(144 50 0 / 80%),
+    inset 0 1px 2px 1px hsl(144 50 0 / 40%),
+
+    0 1px 1px 1px hsl(144 50 80 / 10%),
+
+    0 1px 12px 1px hsl(0, 83%, 33%, 0.4),
+
+    0 0 0 1px hsl(144 50 0 / 50%);
 }
