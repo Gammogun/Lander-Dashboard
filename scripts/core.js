@@ -1,5 +1,6 @@
 function ledOnOff() {
-
+    ledOn();
+    setTimeout(ledOff(), 2000);
 }
 
 function getRadioValue(rangeId, valOut) {
@@ -9,15 +10,4 @@ function getRadioValue(rangeId, valOut) {
     input.addEventListener("input", (event) => {
         value.textContent = event.target.value;
     });
-}
-
-function miniTest() {
-    var element = document.getElementById("satCon");
-    element.classList.remove("diode__bad");
-    element.classList.add("diode__good");
-    setTimeout(() => {
-        var element = document.getElementById("satCon");
-        element.classList.remove("diode__good");
-        element.classList.add("diode__bad");
-    }, 5000);
 }

@@ -149,7 +149,7 @@ am5.ready(function () {
             date: time,
             value: newValue
         })
-
+        //Below is pure animation smoothing
         var newDataItem = series.dataItems[series.dataItems.length - 1];
         newDataItem.animate({
             key: "valueYWorking",

@@ -114,7 +114,7 @@ h3 {
 }
 
 /* Shows all elements for a feedback item */
-.interface-group {
+.interface-container {
   display: flex;
   justify-content: space-between;
   padding: 10px;
