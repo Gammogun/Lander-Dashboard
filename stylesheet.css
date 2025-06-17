@@ -51,6 +51,11 @@
     inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
+.cntrl{
+  width: 5em;
+  height: 2em;
+}
+
 /* grid container */
 .grid-container {
   display: grid;
@@ -143,6 +148,14 @@ option {
 input[type="range"] {
   width: 250px;
   margin: 0;
+}
+
+.stopbtn {
+  background-color: darkred;
+  border-color: yellow;
+  width: 4em;
+  height: 4em;
+  border-radius: 99em;
 }
 
 /*Creates a diode for status feedback. Very fancy*/

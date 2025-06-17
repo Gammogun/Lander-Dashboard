@@ -36,19 +36,23 @@
         <!--Div for data-->
         <div class="left dashboard-body white-text">
             <h3 class="center">Live data</h3>
-            <p id="weight">Module runtime:</p>
+            <p>Module runtime: <span id="unixtime">0</span></p>
             <p id="weight">Live gewicht output:</p>
             <div id="livechartdiv"></div>
         </div>
 
-        <!--Div for all controls-->
+        <!--Div for general controls-->
         <div class="middle dashboard-body white-text">
             <h3 class="center">Controle paneel</h3>
-            <div class="interface-group">
-                <button type="button" class="center button jersey-15 white-text " onclick="ledOn()">Led
-                    test</button>
+            <div class="interface-group controls-block">
+                <button type="button" class="center button jersey-15 white-text cntrl" onclick="ledOnOff()">Ledtest</button>
+                <button type="switch" class="center button jersey-15 white-text cntrl" onclick="socketconnect()">Verbinden</button>
+                <div>
+                    <button class="stopbtn jersey-15 white-text">stop </button>
+                </div>
             </div>
-            
+            <h3></h3>
+
             <!--Divs for arm control-->
             <div class="center">
                 <!--Rotation controls-->
@@ -106,7 +110,7 @@
                 <button type="button" class="button jersey-15 white-text">Graven</button>
             </div>
         </div>
-        
+
 
         <!--Div for status-->
         <div class="right dashboard-body white-text">
@@ -129,64 +133,6 @@
             </div>
 
         </div>
-
-
-        <!------------Web socket sript------------>
-        <script>
-            //Web socket script. Should look into putting this in a script file. Need this to open upon website loading
-            const saturl = '145.49.113.142:1880';       //Url used in all API and websocket requests to connect to satellite
-            const groupId = 'groep19';                 //Specific group it wants to connect to
-            const socketUrl = `ws://${saturl}/ws/${groupId}`;
-
-            // WebSocket instance
-            const socket = new WebSocket(socketUrl);
-
-
-            //On connection/opening of socket
-            socket.onopen = () => {
-                console.log("WebSocket verbonden met satelliet");
-                var element = document.getElementById("satCon");
-                element.classList.remove("diode__bad");
-                element.classList.add("diode__good");
-            };
-
-            //On receiving message/JSON from server
-            socket.onmessage = (event) => {
-                console.log("Ontvangen WebSocket data:", event.data);
-                satData = JSON.parse(event.data)
-
-                //receives JSON and tries to parse it into readable data 
-                try {
-                    console.log(satData);
-                    console.log(satData.analog_sensor_2);
-                    weight = satData.analog_sensor_2;
-                    document.getElementById("weight").textContent = "Live gewicht output:" + " " + weight + "g";
-
-
-
-
-
-                    //shows unixtime
-                    /*if (!isNaN(unixtime)) {
-                        document.getElementById("unixtime").textContent =
-                            unixtime;
-                    } else {
-                        document.getElementById("unixtime").textCont =
-                            "Fout: geen geldige unixtime ontvangen";
-                        document.getElementById("unixtime").textContent =
-                            "Geen data ontvangen";
-                    }*/
-                } catch (e) {
-                    console.error("Fout bij verwerken WebSocket data:", e);
-                }
-            };
-
-            //Handles errors
-            socket.onerror = (error) => {
-                console.error("WebSocket fout:", error);
-            };
-        </script>
-        <!------------End web socket sript------------>
 
     </div>
 
