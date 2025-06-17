@@ -1,7 +1,7 @@
 function ledOnOff() {
     ledOn();
-    setTimeout(ledOff(), 2000);
-}
+    setTimeout(ledOff, 5000);
+};
 
 function getRadioValue(rangeId, valOut) {
     const input = document.getElementById(rangeId);
