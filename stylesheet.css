@@ -6,7 +6,6 @@
   font-style: normal;
 }
 
-
 * {
   margin: 0;
   box-sizing: border-box;
@@ -25,7 +24,17 @@
   color: whitesmoke;
 }
 
-/* Style the header */
+/*Start of grid container*/
+/*Grid container */
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'left left left middle middle right'
+    'footer footer footer footer footer footer';
+}
+
+/*Header style*/
 .header {
   grid-area: header;
   padding: 30px;
@@ -34,6 +43,31 @@
   border-bottom: solid red;
   border-width: 10px;
 }
+
+/* Left column style*/
+.left {
+  grid-area: left;
+}
+
+/* Middle column style*/
+.middle {
+  grid-area: middle;
+}
+
+/* Right column style*/
+.right {
+  grid-area: right;
+}
+
+/* Footer style */
+.footer {
+  grid-area: footer;
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+/*End of container styling*/
 
 .button {
   background-color: #333336;
@@ -51,19 +85,12 @@
     inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
-.cntrl{
+.cntrl {
   width: 5em;
   height: 2em;
 }
 
-/* grid container */
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'header header header header header header'
-    'left left left middle middle right'
-    'footer footer footer footer footer footer';
-}
+
 
 /* Dashboard grid body style*/
 .dashboard-body {
@@ -89,28 +116,7 @@ h3 {
   border-width: 5px;
 }
 
-/* Left column */
-.left {
-  grid-area: left;
-}
 
-/* Middle column */
-.middle {
-  grid-area: middle;
-}
-
-/* Right column */
-.right {
-  grid-area: right;
-}
-
-/* Footer style */
-.footer {
-  grid-area: footer;
-  background-color: #f1f1f1;
-  padding: 10px;
-  text-align: center;
-}
 
 #livechartdiv {
   background-color: #02000e;
@@ -127,11 +133,16 @@ h3 {
 }
 
 .controls-block {
+  border: 2px dotted rgb(96 139 168);
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: left;
   padding: 20px;
+  background-color: darkgoldenrod;
 }
 
+/*Slider CSS content*/
+/*datalist for slider values*/
 datalist {
   display: flex;
   flex-direction: row;
@@ -140,11 +151,12 @@ datalist {
   width: 250px;
 }
 
+/*slider text*/
 option {
   font-size: 15px;
   padding: 0;
 }
-
+/*slider itself. determines width of bar*/
 input[type="range"] {
   width: 250px;
   margin: 0;

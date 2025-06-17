@@ -41,10 +41,10 @@
             <div id="livechartdiv"></div>
         </div>
 
-        <!--Div for general controls-->
+        <!--Div for all controls-->
         <div class="middle dashboard-body white-text">
             <h3 class="center">Controle paneel</h3>
-            <div class="interface-group controls-block">
+            <div class="interface-group">
                 <button type="button" class="center button jersey-15 white-text cntrl" onclick="ledOnOff()">Ledtest</button>
                 <button type="switch" class="center button jersey-15 white-text cntrl" onclick="socketconnect()">Verbinden</button>
                 <div>
@@ -71,11 +71,12 @@
                     </div>
 
                     <label for="turn" class="jersey-15 white-text"><output id="turnvalue">0</output></label>
+                    <label class="jersey-15 white-text"><output>0</output></label>
                     <button type="button" class="button jersey-15 white-text">draaien</button>
                 </div>
                 <!--long arm controls-->
                 <div class="center controls-block">
-                    <div>
+                    <div style="border: solid;">
                         <input type="range" name="longArm" id="longArm" min="0" max="180" list="degreevalues"
                             onfocus="getRadioValue('longArm', 'longarmvalue')">
                         <!--Other datalists are needed for visual showcasing-->
@@ -88,6 +89,7 @@
                     </div>
 
                     <label for="turn" class="jersey-15 white-text"><output id="longarmvalue">0</output></label>
+                    <label class="jersey-15 white-text"><output>0</output></label>
                     <button type="button" class="button jersey-15 white-text">Lange arm</button>
                 </div>
                 <!--short arm controls-->
@@ -104,6 +106,7 @@
                     </div>
 
                     <label for="turn" class="jersey-15 white-text"><output id="shortarmvalue">0</output></label>
+                    <label class="jersey-15 white-text"><output>0</output></label>
                     <button type="button" class="button jersey-15 white-text">Korte arm</button>
                 </div>
 
