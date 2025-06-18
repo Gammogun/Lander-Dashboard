@@ -8,7 +8,6 @@
 
 * {
   margin: 0;
-  box-sizing: border-box;
 }
 
 /*palette based on avans colors*/
@@ -90,8 +89,6 @@
   height: 2em;
 }
 
-
-
 /* Dashboard grid body style*/
 .dashboard-body {
   background-color: #040413;
@@ -116,15 +113,13 @@ h3 {
   border-width: 5px;
 }
 
-
-
 #livechartdiv {
   background-color: #02000e;
   width: 100%;
   height: 600px;
 }
 
-/* Shows all elements for a feedback item */
+/*Styling of feedback rows*/
 .interface-container {
   display: flex;
   justify-content: space-between;
@@ -132,14 +127,22 @@ h3 {
   border-bottom: solid;
 }
 
+/*Controls UI styling*/
 .controls-block {
-  border: 2px dotted rgb(96 139 168);
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: left;
-  padding: 20px;
-  background-color: darkgoldenrod;
+  justify-content: space-between;
+  align-content: stretch;
+  padding: 10px;
+  border-bottom: solid white;
 }
+
+.controls-block>div>button {
+  width: 150px;
+}
+
+/*End of Controls UI styling*/
 
 /*Slider CSS content*/
 /*datalist for slider values*/
@@ -156,6 +159,7 @@ option {
   font-size: 15px;
   padding: 0;
 }
+
 /*slider itself. determines width of bar*/
 input[type="range"] {
   width: 250px;
@@ -224,4 +228,16 @@ input[type="range"] {
     0 1px 12px 1px hsl(0, 83%, 33%, 0.4),
 
     0 0 0 1px hsl(144 50 0 / 50%);
+}
+
+/*From Uiverse.io by adamgiebl https://uiverse.io/adamgiebl/curvy-earwig-79*/
+/*Neat little background styling*/
+.screenbg {
+  width: 80px;
+  border: solid rgb(95, 95, 95);
+  --color: rgba(64, 146, 71, 0.3);
+  background-color: #363836;
+  background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+  background-size: 30px 30px;
 }

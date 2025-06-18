@@ -44,19 +44,25 @@
         <!--Div for all controls-->
         <div class="middle dashboard-body white-text">
             <h3 class="center">Controle paneel</h3>
-            <div class="interface-group">
-                <button type="button" class="center button jersey-15 white-text cntrl" onclick="ledOnOff()">Ledtest</button>
-                <button type="switch" class="center button jersey-15 white-text cntrl" onclick="socketconnect()">Verbinden</button>
+
+            <!--main controls-->
+            <div class="interface-container">
                 <div>
-                    <button class="stopbtn jersey-15 white-text">stop </button>
+                    <button type="button" class="center button jersey-15 white-text cntrl"
+                        onclick="ledOnOff()">Ledtest</button>
+                </div>
+                <div>
+                    <button type="switch" class="center button jersey-15 white-text cntrl"
+                        onclick="socketconnect()">Verbinden</button>
+                </div>
+                <div>
+                    <button class="stopbtn jersey-15 white-text">stop</button>
                 </div>
             </div>
-            <h3></h3>
-
             <!--Divs for arm control-->
-            <div class="center">
+            <div>
                 <!--Rotation controls-->
-                <div class="center controls-block">
+                <div class="controls-block">
                     <div>
                         <input type="range" name="turn" id="turn" min="0" max="180" list="degreevalues"
                             onfocus="getRadioValue('turn', 'turnvalue')">
@@ -69,14 +75,23 @@
                             <option value="180" label="180"></option>
                         </datalist>
                     </div>
+                    <div class="screenbg center">
+                        <label for="turn" class="jersey-15 white-text"><output id="turnvalue">0</output></label>
+                        <p>input</p>
+                    </div>
 
-                    <label for="turn" class="jersey-15 white-text"><output id="turnvalue">0</output></label>
-                    <label class="jersey-15 white-text"><output>0</output></label>
-                    <button type="button" class="button jersey-15 white-text">draaien</button>
+                    <div class="screenbg center">
+                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <p>status</p>
+                    </div>
+                    <div>
+                        <button type="button" class="button jersey-15 white-text">draaien</button>
+                    </div>
+
                 </div>
                 <!--long arm controls-->
-                <div class="center controls-block">
-                    <div style="border: solid;">
+                <div class="controls-block">
+                    <div>
                         <input type="range" name="longArm" id="longArm" min="0" max="180" list="degreevalues"
                             onfocus="getRadioValue('longArm', 'longarmvalue')">
                         <!--Other datalists are needed for visual showcasing-->
@@ -87,13 +102,23 @@
                             <option value="135" label="135"></option>
                             <option value="180" label="180"></option>
                     </div>
+                    <div class="screenbg center">
+                        <label for="turn" class="jersey-15 white-text"><output id="longarmvalue">0</output></label>
+                        <p>input</p>
+                    </div>
 
-                    <label for="turn" class="jersey-15 white-text"><output id="longarmvalue">0</output></label>
-                    <label class="jersey-15 white-text"><output>0</output></label>
-                    <button type="button" class="button jersey-15 white-text">Lange arm</button>
+                    <div class="screenbg center">
+                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <p>status</p>
+                    </div>
+
+                    <div>
+                        <button type="button" class="button jersey-15 white-text">Lange arm</button>
+                    </div>
+
                 </div>
                 <!--short arm controls-->
-                <div class="center controls-block">
+                <div class="controls-block">
                     <div>
                         <input type="range" name="shortArm" id="shortArm" min="0" max="180" list="degreevalues"
                             onfocus="getRadioValue('shortArm', 'shortarmvalue')">
@@ -105,12 +130,49 @@
                             <option value="180" label="180"></option>
                     </div>
 
-                    <label for="turn" class="jersey-15 white-text"><output id="shortarmvalue">0</output></label>
-                    <label class="jersey-15 white-text"><output>0</output></label>
-                    <button type="button" class="button jersey-15 white-text">Korte arm</button>
+                    <div class="screenbg center">
+                        <label for="turn" class="jersey-15 white-text"><output id="shortarmvalue">0</output></label>
+                        <p>input</p>
+                    </div>
+                    <div class="screenbg center">
+                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <p>status</p>
+                    </div>
+
+                    <div>
+                        <button type="button" class="button jersey-15 white-text">Korte arm</button>
+                    </div>
+
                 </div>
 
-                <button type="button" class="button jersey-15 white-text">Graven</button>
+                <!--digging arm controls-->
+                <div class="controls-block">
+                    <div>
+                        <input type="range" name="bucket" id="bucket" min="0" max="180" list="degreevalues"
+                            onfocus="getRadioValue('bucket', 'bucketvalue')">
+                        <datalist id="degreevalues">
+                            <option value="0" label="0"></option>
+                            <option value="45" label="45"></option>
+                            <option value="90" label="90"></option>
+                            <option value="135" label="135"></option>
+                            <option value="180" label="180"></option>
+                    </div>
+
+                    <div class="screenbg center">
+                        <label for="turn" class="jersey-15 white-text"><output id="bucketvalue">0</output></label>
+                        <p>input</p>
+                    </div>
+                    <div class="screenbg center">
+                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <p>status</p>
+                    </div>
+
+                    <div>
+                        <button type="button" class="button jersey-15 white-text">Graven</button>
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
@@ -138,8 +200,6 @@
         </div>
 
     </div>
-
-
 </body>
 
 </html>

@@ -1,10 +1,10 @@
 // Code using an API or websockets goes here
 
 //variables
-const satUrl = '145.49.127.250:1880/';       //Url used in all API and websocket requests to connect to satellite
+const satUrl = '145.49.127.250:1880';       //Url used in all API and websocket requests to connect to satellite
 const groupId = 'groep19';                 //Specific group it wants to connect to
 const dataTypeDigital = 'digital_output';       //indicates which datatype is selected
-const fetchUrl = `http://${satUrl}${groupId}?`;
+const fetchUrl = `http://${satUrl}/${groupId}?`;
 
 //API functions==================================================================================
 
