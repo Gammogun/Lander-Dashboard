@@ -1,14 +1,14 @@
 //Custom theme for data chart.
 class SmallContrastText extends am5.Theme {
-  setupDefaultRules() {
-    
-    this.rule("Label").setAll({
-      fontSize: 15,
-      fill: am5.color(0x2bc52b)
+    setupDefaultRules() {
 
-    });
+        this.rule("Label").setAll({
+            fontSize: 15,
+            fill: am5.color(0x2bc52b)
 
-  }
+        });
+
+    }
 }
 
 //Live Chart script
@@ -30,22 +30,21 @@ am5.ready(function () {
 
 
     // Generate random data
-    // Change firstdate to weight string or unixtime
-    // Have chartData get data from web socket
+    // firstDate is date time. Needs unixtime
+    // value is weight data
     var value = 0;
 
-    // Generate data can be removed in the future. Data is received from web socket
+    // Generate chart
     function generateChartData() {
         var chartData = [];
         var firstDate = new Date();
         firstDate.setMinutes(firstDate.getMinutes() - 2000);
         firstDate.setHours(0, 0, 0, 0);
 
+        //sets desired amount of columns
         for (var i = 0; i < 15; i++) {
             var newDate = new Date(firstDate);
-            newDate.setMinutes(newDate.getMinutes() + i);
-
-            value = Math.random() * (30-0)
+            //value = Math.random() * (30-0)
 
             chartData.push({
                 date: newDate.getTime(),
@@ -54,9 +53,7 @@ am5.ready(function () {
         }
         return chartData;
     }
-
     var data = generateChartData();
-
 
     // Create chart
     // https://www.amcharts.com/docs/v5/charts/xy-chart/
@@ -133,15 +130,17 @@ am5.ready(function () {
 
 
     // Update data every 2 seconds
+    // disable when actually showing data
     setInterval(function () {
         addData();
+        weight = Math.random(0, 30);
     }, 2000)
 
     //Adds new data
     function addData() {
         var lastDataItem = series.dataItems[series.dataItems.length - 1];
         var lastValue = lastDataItem.get("valueY");
-        var newValue = (Math.random() * (30-0));
+        var newValue = weight
         var lastDate = new Date(lastDataItem.get("valueX"));
         var time = am5.time.add(new Date(lastDate), "minute", 1).getTime();
         series.data.removeIndex(0);
@@ -174,8 +173,6 @@ am5.ready(function () {
             }
         }
     }
-
-
     // Make stuff animate on load
     // https://www.amcharts.com/docs/v5/concepts/animations/
     chart.appear(2000, 100);

@@ -36,8 +36,10 @@
         <!--Div for data-->
         <div class="left dashboard-body white-text">
             <h3 class="center">Live data</h3>
-            <p>Module runtime: <span id="unixtime">0</span></p>
-            <p id="weight">Live gewicht output:</p>
+            <div>
+                <p>Module runtime: <span id="unixtime">0</span></p>
+                <p id="weight">Laatste weging: <output>0</output></p>
+            </div>
             <div id="livechartdiv"></div>
         </div>
 
@@ -81,11 +83,12 @@
                     </div>
 
                     <div class="screenbg center">
-                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <label class="jersey-15 white-text"><output id="rotationOut">0</output></label>
                         <p>status</p>
                     </div>
                     <div>
-                        <button type="button" class="button jersey-15 white-text">draaien</button>
+                        <button type="button" class="button jersey-15 white-text"
+                            onclick="setTarget('turn', 2)">draaien</button>
                     </div>
 
                 </div>
@@ -103,17 +106,18 @@
                             <option value="180" label="180"></option>
                     </div>
                     <div class="screenbg center">
-                        <label for="turn" class="jersey-15 white-text"><output id="longarmvalue">0</output></label>
+                        <label for="longArm" class="jersey-15 white-text"><output id="longarmvalue">0</output></label>
                         <p>input</p>
                     </div>
 
                     <div class="screenbg center">
-                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <label class="jersey-15 white-text"><output id="longArmOut">0</output></label>
                         <p>status</p>
                     </div>
 
                     <div>
-                        <button type="button" class="button jersey-15 white-text">Lange arm</button>
+                        <button type="button" class="button jersey-15 white-text"
+                            onclick="setTarget('longArm', 3)">Lange arm</button>
                     </div>
 
                 </div>
@@ -131,21 +135,22 @@
                     </div>
 
                     <div class="screenbg center">
-                        <label for="turn" class="jersey-15 white-text"><output id="shortarmvalue">0</output></label>
+                        <label for="shortArm" class="jersey-15 white-text"><output id="shortarmvalue">0</output></label>
                         <p>input</p>
                     </div>
                     <div class="screenbg center">
-                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <label class="jersey-15 white-text"><output id="shortArmOut">0</output></label>
                         <p>status</p>
                     </div>
 
                     <div>
-                        <button type="button" class="button jersey-15 white-text">Korte arm</button>
+                        <button type="button" class="button jersey-15 white-text"
+                            onclick="setTarget('shortArm', 4)">Korte arm</button>
                     </div>
 
                 </div>
 
-                <!--digging arm controls-->
+                <!--bucket arm controls-->
                 <div class="controls-block">
                     <div>
                         <input type="range" name="bucket" id="bucket" min="0" max="180" list="degreevalues"
@@ -159,16 +164,17 @@
                     </div>
 
                     <div class="screenbg center">
-                        <label for="turn" class="jersey-15 white-text"><output id="bucketvalue">0</output></label>
+                        <label for="bucket" class="jersey-15 white-text"><output id="bucketvalue">0</output></label>
                         <p>input</p>
                     </div>
                     <div class="screenbg center">
-                        <label class="jersey-15 white-text"><output>0</output></label>
+                        <label class="jersey-15 white-text"><output id="bucketOut">0</output></label>
                         <p>status</p>
                     </div>
 
                     <div>
-                        <button type="button" class="button jersey-15 white-text">Graven</button>
+                        <button type="button" class="button jersey-15 white-text"
+                            onclick="setTarget('bucket', 5)">Graven</button>
                     </div>
 
                 </div>
