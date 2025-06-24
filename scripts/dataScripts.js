@@ -44,6 +44,14 @@ function ledOff() {
 };
 //End led off
 
+//Arm controls
+
+//Rotation of arm
+
+//Control of long arm
+
+//Control of short
+
 //Web socket==================================================================================
 function socketconnect() {
     const socketUrl = `ws://${satUrl}/ws/${groupId}`;
