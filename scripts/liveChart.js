@@ -131,10 +131,10 @@ am5.ready(function () {
 
     // Update data every 2 seconds
     // disable when actually showing data
+    /*
     setInterval(function () {
         addData();
-        weight = Math.random(0, 30);
-    }, 2000)
+    }, 2000)*/
 
     //Adds new data
     function addData() {
@@ -178,3 +178,5 @@ am5.ready(function () {
     chart.appear(2000, 100);
 
 }); // end am5.ready()
+
+

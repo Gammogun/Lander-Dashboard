@@ -7,6 +7,10 @@ const dataTypeDigital = 'digital_output';       //indicates which datatype is se
 const fetchUrl = `http://${satUrl}/${groupId}?`;
 var time = 0;
 var weight = 0;
+var armRot = 0;
+var armLong = 0;
+var armShort = 0;
+var armBucket = 0;
 var satDiode = document.getElementById("satCon");
 var roverDiode = document.getElementById("roverCon");
 
@@ -90,36 +94,37 @@ function socketconnect() {
         roverDiode.classList.add("diode__good");
 
         //rover lifetime
-        if (satData == satData.unixtime_1) {
-            time = satData.unixtime_1;
-            document.getElementById("unixtimeOut").textContent = time;
-        }
+        time = satData.unixtime_1;
+        document.getElementById("unixtimeOut").value = time;
+        console.log(time);
+
+        //weight data
+        weight = satData.analog_sensor_2;
+        document.getElementById("weightOut").value = weight;
+        console.log(weight);
+
 
         //rotation of arm
-        if (satData == satData.digital_input_3) {
-            let armRot = satData.digital_input_3;
-            document.getElementById("rotationOut").textContent = armRot;
+        armRot = satData.digital_sensor_3;
+        document.getElementById("rotationOut").value = armRot;
 
-        }
+
 
         //angle of long arm
-        if (satData == satData.digital_input_4) {
-            let armLong = satData.digital_input_4;
-            document.getElementById("longArmOut").textContent = armLong;
-        }
+        armLong = satData.digital_sensor_4;
+        document.getElementById("longArmOut").value = armLong;
+
 
         //angle of short arm
-        if (satData == satData.digital_input_5) {
-            let armShort = satData.digital_input_5;
-            document.getElementById("shortArmOut").textContent = armShort;
-        }
+        armShort = satData.digital_sensor_5;
+        document.getElementById("shortArmOut").value = armShort;
+
 
         //angle of bucket
-        if (satData == satData.digital_input_6) {
-            let armBucket = satData.digital_input_6;
-            document.getElementById("bucketOut").textContent = armBucket;
-        }
+        armBucket = satData.digital_sensor_6;
+        document.getElementById("bucketOut").value = armBucket;
 
+        
     }; //end of message received
 
     //Handles errors

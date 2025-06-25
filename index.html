@@ -37,8 +37,8 @@
         <div class="left dashboard-body white-text">
             <h3 class="center">Live data</h3>
             <div>
-                <p>Module runtime: <span id="unixtime">0</span></p>
-                <p id="weight">Laatste weging: <output>0</output></p>
+                <p>Module runtime: <output id="unixtimeOut">0</output></p>
+                <p>Laatste weging: <output id="weightOut">0</output></p>
             </div>
             <div id="livechartdiv"></div>
         </div>
@@ -190,9 +190,9 @@
                 <p>Sattelliet Connectie</p>
                 <div id="satCon" class="diode diode__bad"></div>
             </div>
-            <div id="roverCon" class="interface-container">
+            <div class="interface-container">
                 <p>Aadlander Connectie</p>
-                <div class="diode diode__bad"></div>
+                <div id="roverCon" class="diode diode__bad"></div>
             </div>
             <div id="sendTask" class="interface-container">
                 <p>Opdracht verzonden</p>
