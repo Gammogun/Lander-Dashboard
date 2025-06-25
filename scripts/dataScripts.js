@@ -123,7 +123,7 @@ function socketconnect() {
         //angle of bucket
         armBucket = satData.digital_sensor_6;
         document.getElementById("bucketOut").value = armBucket;
-
+        addData();
         
     }; //end of message received
 
