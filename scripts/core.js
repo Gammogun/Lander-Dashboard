@@ -23,18 +23,31 @@ function resetArm(longArmID, shortArmID, bucketID) {
     getRadioValue(shortArmID, 'shortarmvalue');
     getRadioValue(bucketID, 'bucketvalue');
 }
-//Changes status diodes
+//Sets diode status
 function diodeStatus(status, diodeID) {
     var diodeName = document.getElementById(diodeID);
 
-    //if it's bad
+    //bad
     if (status == 0) {
         diodeName.classList.remove("diode__good");
         diodeName.classList.add("diode__bad");
     }
-    //if it's good
+    //good
     if (status == 1) {
         diodeName.classList.remove("diode__bad");
         diodeName.classList.add("diode__good");
     }
+    //neutral
+    if (status == 2) {
+        diodeName.classList.remove("diode__bad");
+        diodeName.classList.remove("diode__good");
+    }
+
+}
+
+function diodeBlink(diodeID) {
+    diodeStatus(1, diodeID);
+    setTimeout(() => {
+        diodeStatus(2, diodeID);
+    }, 1000);
 }

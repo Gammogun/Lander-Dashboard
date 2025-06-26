@@ -65,7 +65,8 @@ function setTarget(targetVal, channelId) {
             }
             return response.json();
         })
-        .then(data => console.log('Success:', data))
+        .then(data => console.log('Success:', data),
+        diodeBlink('sendDiode'))
         .catch(error => console.error('Error:', error));
 };
 
@@ -88,6 +89,8 @@ function socketconnect() {
         satData = JSON.parse(event.data)
         //Change rover to good diode on message received
         diodeStatus(1, "roverCon");
+        //blink that we received a message
+        diodeBlink('receivedDiode')
 
         //rover lifetime
         time = satData.unixtime_1;
