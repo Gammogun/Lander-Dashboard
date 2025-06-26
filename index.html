@@ -63,35 +63,6 @@
             </div>
             <!--Divs for arm control-->
             <div>
-                <!--Rotation controls-->
-                <div class="controls-block">
-                    <div>
-                        <input type="range" name="turn" id="turn" min="0" max="180" list="degreevalues"
-                            onfocus="getRadioValue('turn', 'turnvalue')">
-                        <!--markers for slider-->
-                        <datalist id="degreevalues">
-                            <option value="0" label="0"></option>
-                            <option value="45" label="45"></option>
-                            <option value="90" label="90"></option>
-                            <option value="135" label="135"></option>
-                            <option value="180" label="180"></option>
-                        </datalist>
-                    </div>
-                    <div class="screenbg center">
-                        <label for="turn" class="jersey-15 white-text"><output id="turnvalue">0</output></label>
-                        <p>input</p>
-                    </div>
-
-                    <div class="screenbg center">
-                        <label class="jersey-15 white-text"><output id="rotationOut">0</output></label>
-                        <p>status</p>
-                    </div>
-                    <div>
-                        <button type="button" class="button jersey-15 white-text"
-                            onclick="setTarget('turn', 2)">draaien</button>
-                    </div>
-
-                </div>
                 <!--long arm controls-->
                 <div class="controls-block">
                     <div>

@@ -1,8 +1,10 @@
+//toggles led on a timer
 function ledOnOff() {
     ledOn();
     setTimeout(ledOff, 5000);
 };
 
+//slider modifier
 function getRadioValue(rangeId, valOut) {
     let input = document.getElementById(rangeId);
     let value = document.getElementById(valOut);
@@ -12,12 +14,14 @@ function getRadioValue(rangeId, valOut) {
     });
 }
 //Sets all sliders to base position
-function resetArm(longarmID, shortArmID, bucketID){
-    const long = document.getElementById(longarmID).value = "125";
-    const short = document.getElementById(shortArmID).value = "60";
-    const bucket = document.getElementById(bucketID).value = "100";
+function resetArm(longArmID, shortArmID, bucketID) {
+    document.getElementById(longArmID).value = "125";
+    document.getElementById(shortArmID).value = "60";
+    document.getElementById(bucketID).value = "100";
 
-
+    getRadioValue(longArmID, 'longarmvalue');
+    getRadioValue(shortArmID, 'shortarmvalue');
+    getRadioValue(bucketID, 'bucketvalue');
 }
 //Changes status diodes
 function diodeStatus(status, diodeID) {
