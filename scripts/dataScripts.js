@@ -11,8 +11,6 @@ var armRot = 0;
 var armLong = 0;
 var armShort = 0;
 var armBucket = 0;
-var satDiode = document.getElementById("satCon");
-var roverDiode = document.getElementById("roverCon");
 
 //API functions==================================================================================
 
@@ -81,17 +79,15 @@ function socketconnect() {
     //On connection/opening of socket
     socket.onopen = () => {
         console.log("WebSocket verbonden met satelliet");
-        satDiode.classList.remove("diode__bad");
-        satDiode.classList.add("diode__good");
+        diodeStatus(1, "satCon");
     };
 
     //On receiving message/JSON from server
     socket.onmessage = (event) => {
         console.log("Ontvangen WebSocket data:", event.data);
         satData = JSON.parse(event.data)
-        //Change rover diode on message received
-        roverDiode.classList.remove("diode__bad");
-        roverDiode.classList.add("diode__good");
+        //Change rover to good diode on message received
+        diodeStatus(1, "roverCon");
 
         //rover lifetime
         time = satData.unixtime_1;
@@ -124,7 +120,7 @@ function socketconnect() {
         armBucket = satData.digital_sensor_6;
         document.getElementById("bucketOut").value = armBucket;
         addData();
-        
+
     }; //end of message received
 
     //Handles errors
@@ -133,7 +129,7 @@ function socketconnect() {
     };
 
     socket.onclose = () => {
-        satDiode.classList.remove("diode__good");
-        satDiode.classList.add("diode__bad");
+        diodeStatus(0, "satCon");
+        diodeStatus(0, "roverCon");
     }
 };
