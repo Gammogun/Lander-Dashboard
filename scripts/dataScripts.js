@@ -101,13 +101,7 @@ function socketconnect() {
         weight = satData.analog_sensor_2;
         document.getElementById("weightOut").value = weight;
         console.log(weight);
-
-
-        //rotation of arm
-        armRot = satData.digital_sensor_3;
-        document.getElementById("rotationOut").value = armRot;
-
-
+        addData();
 
         //angle of long arm
         armLong = satData.digital_sensor_4;
@@ -122,7 +116,6 @@ function socketconnect() {
         //angle of bucket
         armBucket = satData.digital_sensor_6;
         document.getElementById("bucketOut").value = armBucket;
-        addData();
 
     }; //end of message received
 
